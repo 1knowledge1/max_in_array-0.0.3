@@ -1,10 +1,11 @@
+#include "stdafx.h"
 #include <iostream>
 #include <sstream>
 
-int main()
-{
+int main() {
+
 	bool failure = false;
-	int max, max2, numbers[10], numbers2[10];
+	int max, max_sum, numbers[10], numbers2[10];
 
 	for (std::string string; std::getline(std::cin, string); ) {
 		std::istringstream stream(string);
@@ -15,6 +16,12 @@ int main()
 			}
 		}
 		break;
+	}
+
+	if (failure) 
+	{
+		std::cout << "An error has occured while reading numbers from line" << std::endl;
+		return 0;
 	}
 
 	for (std::string string2; std::getline(std::cin, string2); ) {
@@ -29,29 +36,18 @@ int main()
 	}
 
 	if (!failure) {
+		max = numbers[0];
+		max_sum = max + numbers2[0];
 
-	int pos = 0;
-	max2 = numbers2[0];
-
-	for (int j = 1; j < 10; j++) {
-		if (numbers2[j] >= max2) {
-			max2 = numbers2[j];
-			pos = j;
+		for (int i = 1; i < 10; ++i) {
+			if (max < numbers[i]) max = numbers[i];
+			if (max_sum < (max + numbers2[i])) max_sum = max + numbers2[i];
+			}
+		std::cout << max_sum;
 		}
-	}
-
-	max = numbers[0];
-	for (int j = 1; j <= pos; j++) {
-		if (numbers[j]>max) {
-			max = numbers[j];
-		}
-	}
-		std::cout << max + max2;
-	}
-	else {
+	else 
+	{
 		std::cout << "An error has occured while reading numbers from line" << std::endl;
 	}
-
-	system("pause");
 	return 0;
 }
